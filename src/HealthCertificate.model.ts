@@ -4,7 +4,7 @@
  * https://ec.europa.eu/health/system/files/2021-04/digital-green-certificates_dt-specifications_en_0.pdf
  */
 
-interface HealthCertificateModel {
+export interface HealthCertificateModel {
     ver: string, //Schema Version
     nam: PersonName, //Sur and Forename
     dob: string, //Date of Birth in ISO 8601
@@ -13,14 +13,14 @@ interface HealthCertificateModel {
     r?: RecoveryEntry[], //only one Element - one of v,t,r must be set
 }
 
-interface PersonName {
+export interface PersonName {
     fn?: string, //surname
     fnt: string, //Standardised surname
     gn?: string, //Forename
     gnt?: string, //Standardised forename
 }
 
-interface VaccinationEntry {
+export interface VaccinationEntry {
     tg: string, //"disease or agent targeted",
     vp: string, //"vaccine or prophylaxis"
     mp: string, //"vaccine medicinal product"
@@ -34,7 +34,7 @@ interface VaccinationEntry {
     ci: string, //"Unique Certificate Identifier: UVCI"
 }
 
-interface TestEntry {
+export interface TestEntry {
     tg: string, // "disease or agent targeted",
     tt: string, // "Type of Test"
     nm?: string,// "NAA Test Name"
@@ -47,7 +47,7 @@ interface TestEntry {
     ci: string, // "Unique Certificate Identifier: UVCI"
 }
 
-interface RecoveryEntry {
+export interface RecoveryEntry {
     tg: string, // "disease or agent targeted",
     fr: string, // "ISO 8601 complete date of first positive NAA test result"
     co: string, // "Country of Test",
