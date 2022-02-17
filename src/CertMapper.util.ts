@@ -1,5 +1,5 @@
-import {HealthCertificateClaim} from "./HealthCertificateClaim";
-import {HealthCertificateModel} from "./HealthCertificate.model";
+import {HealthCertificateClaim} from "./models/HealthCertificateClaim";
+import {HealthCertificateModel} from "./models/HealthCertificate.model";
 
 export class CertMapperUtil {
     static payloadToHCERTClaim(payload: Map<any, any>): HealthCertificateClaim {
