@@ -8,6 +8,7 @@ import {HealthCertificateClaim} from "./models/HealthCertificateClaim";
 import {TrustListModel} from "./models/TrustList.model";
 import {CertificateModel} from "./models/Certificate.model";
 
+//See: https://github.com/ehn-dcc-development/ehn-sign-verify-javascript-trivial/blob/main/cose_verify.js
 export class ElectronicHealthCertificateChecker {
 
     constructor() {
@@ -105,6 +106,7 @@ export class ElectronicHealthCertificateChecker {
         return {coseMessage, hcertCertClaim, kid};
     }
 
+
     static async verifyCoseMessage (
         coseMessage: CoseMessageModel,
         publicKey: string
@@ -113,7 +115,7 @@ export class ElectronicHealthCertificateChecker {
         const cert = new x509.X509Certificate(publicKey);
         const rawData = cert.publicKey.rawData;
 
-
+        //See: https://github.com/btielen/covid-certificate/blob/7f8631a2e0bdc5debf5c9877858d71ffd8ade329/src/cose/ECDS256SignatureVerifier.ts#L6
         const pk = await crypto.subtle.importKey(
             "spki",
             rawData,
