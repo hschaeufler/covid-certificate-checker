@@ -1,6 +1,6 @@
 {
   "name": "covid-certificate-checker",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -13,11 +13,11 @@
   "dependencies": {
     "@peculiar/x509": "^1.6.1",
     "base45-ts": "^1.0.3",
-    "cbor-web": "^8.1.0",
     "pako": "^2.0.4",
     "typescript": "^4.5.5"
   },
   "devDependencies": {
+    "cbor": "^8.1.0",
     "@types/pako": "^1.0.3"
   }
 }

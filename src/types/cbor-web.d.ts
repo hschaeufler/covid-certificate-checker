@@ -1,3 +1,3 @@
 declare module 'cbor-web' {
-    export * from "cbor";
+    export * from 'cbor';
 }

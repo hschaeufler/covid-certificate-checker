@@ -1,4 +1,3 @@
-import {HealthCertificateClaim} from "./HealthCertificateClaim";
 
 export function toBase64String(uint8Array: Uint8Array) {
     let charString = "";
