@@ -13,11 +13,11 @@
   "dependencies": {
     "@peculiar/x509": "^1.6.1",
     "base45-ts": "^1.0.3",
-    "pako": "^2.0.4",
-    "typescript": "^4.5.5"
+    "pako": "^2.0.4"
   },
   "devDependencies": {
     "cbor": "^8.1.0",
+    "typescript": "^4.5.5",
     "@types/pako": "^1.0.3"
   }
 }
