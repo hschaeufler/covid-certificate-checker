@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@peculiar/x509": "^1.6.1",
+    "@types/jasmine": "^3.10.3",
     "base45-ts": "^1.0.3",
     "pako": "^2.0.4"
   },
