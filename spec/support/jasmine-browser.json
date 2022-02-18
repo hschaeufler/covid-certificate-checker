@@ -1,14 +1,9 @@
 {
-  "srcDir": "src",
-  "srcFiles": [
-    "**/*.js"
-  ],
-  "specDir": "spec",
+  "srcDir": "dist",
+  "srcFiles": [],
+  "specDir": "dist",
   "specFiles": [
-    "**/*[sS]pec.js"
-  ],
-  "helpers": [
-    "helpers/**/*.js"
+    "test.js"
   ],
   "env": {
     "stopSpecOnExpectationFailure": false,
@@ -16,6 +11,6 @@
     "random": true
   },
   "browser": {
-    "name": "firefox"
+    "name": "chrome"
   }
 }

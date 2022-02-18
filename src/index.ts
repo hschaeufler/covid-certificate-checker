@@ -11,13 +11,10 @@ import {CertificateModel} from "./models/Certificate.model";
 //See: https://github.com/ehn-dcc-development/ehn-sign-verify-javascript-trivial/blob/main/cose_verify.js
 export class ElectronicHealthCertificateChecker {
 
-    constructor() {
-    }
-
     static async verifyCertificate(
         certificate: string,
-        trustList?: TrustListModel,
         publicKey?: string,
+        trustList?: TrustListModel,
     ): Promise<{
         healthCertificateClaim: HealthCertificateClaim,
         isVerified: boolean,
@@ -35,7 +32,7 @@ export class ElectronicHealthCertificateChecker {
             );
 
             if(filteredCertificates.length < 1) {
-                throw new DOMException("No Ceritiface in Trust-List with specified kid: "+ decodedCertificate.kid);
+                throw new DOMException("No Certificate in Trust-List with specified kid: "+ decodedCertificate.kid);
             }
         }
 
