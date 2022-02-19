@@ -12,10 +12,14 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
+        modules: [__dirname, "src", "node_modules"],
+        extensions: ["*", ".js", ".jsx", ".tsx", ".ts"],
     },
     output: {
         filename: 'index.js',
         path: path.resolve(__dirname, 'dist'),
+        library: {
+            type: 'commonjs-static',
+        },
     },
 };

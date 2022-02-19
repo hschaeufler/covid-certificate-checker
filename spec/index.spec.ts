@@ -1,4 +1,5 @@
-import {ElectronicHealthCertificateChecker} from "../src";
+import ElectronicHealthCertificateChecker from "../dist";
+
 
 describe("A Covid-Certificate-Checker-Testsuite", function () {
 

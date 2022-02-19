@@ -4,10 +4,10 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "test:build" : "npx webpack --config webpack-test.config.js --mode development",
+    "test:build" : "npm run build && npx webpack --config webpack-test.config.js --mode none",
     "test:serve": "npm run test:build && jasmine-browser-runner serve",
     "test": "npm run test:build && jasmine-browser-runner runSpecs",
-    "build": "npx webpack --config=webpack.config.js"
+    "build": "npx webpack --config=webpack.config.js --mode none"
   },
   "keywords": [],
   "author": "",

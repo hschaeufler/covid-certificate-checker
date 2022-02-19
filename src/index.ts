@@ -9,7 +9,7 @@ import {TrustListModel} from "./models/TrustList.model";
 import {CertificateModel} from "./models/Certificate.model";
 
 //See: https://github.com/ehn-dcc-development/ehn-sign-verify-javascript-trivial/blob/main/cose_verify.js
-export class ElectronicHealthCertificateChecker {
+export default class ElectronicHealthCertificateChecker {
 
     static async verifyCertificate(
         certificate: string,
