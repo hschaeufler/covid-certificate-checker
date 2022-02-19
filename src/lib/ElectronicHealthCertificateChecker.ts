@@ -10,7 +10,7 @@ import {CertificateModel} from "./models/Certificate.model";
 import {CoseMessageModel} from "./models/CoseMessage.model";
 
 //See: https://github.com/ehn-dcc-development/ehn-sign-verify-javascript-trivial/blob/main/cose_verify.js
-export class ElectronicHealthCertificateChecker {
+export default class ElectronicHealthCertificateChecker {
 
     static decode(certificate: string): HealthCertificateClaim {
         try {

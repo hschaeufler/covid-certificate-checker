@@ -1,6 +1,6 @@
 {
   "name": "covid-certificate-checker",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,8 +11,8 @@
     "build": "tsc"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Holger Schäufler",
+  "license": "MIT",
   "dependencies": {
     "@peculiar/x509": "^1.6.1",
     "base45-ts": "^1.0.3",

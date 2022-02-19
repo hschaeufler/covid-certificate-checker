@@ -86,4 +86,7 @@ You can run the [Jasmine-Tests](https://jasmine.github.io/setup/browser.html) wi
 * [Hert Spec](https://github.com/ehn-dcc-development/hcert-spec/blob/main/hcert_spec.md)
 * [Technical Specifications](https://ec.europa.eu/health/system/files/2021-04/digital-green-certificates_v3_en_0.pdf)
 ## Contribute
-Please feel free to contribute or contact me if you have some Questions.
+You can find Testdata under: [DGC Testdata](https://github.com/eu-digital-green-certificates/dgc-testdata)
+## Contribute
+The classes I wrote in the src folder are under the MIT license. Not affected by this are for example used schemas, Qr-Codes, files, Documentation or test data that come from other authors.
+Please feel free to contribute or contact me if you have some Questions. 

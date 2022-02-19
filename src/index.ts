@@ -1,3 +1,3 @@
-import {ElectronicHealthCertificateChecker} from "./lib/ElectronicHealthCertificateChecker";
+import ElectronicHealthCertificateChecker from "./lib/ElectronicHealthCertificateChecker";
 
-export {ElectronicHealthCertificateChecker};
+export default ElectronicHealthCertificateChecker;

@@ -2,7 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
-    "module": "ES6",
+    "module": "es2020",
     "moduleResolution": "node",
     "lib": [ "ES6", "DOM" ],
     "target": "ES6",
