@@ -77,3 +77,13 @@ Other projects and libraries I used as inspiration:
 * [Digital Covid Certificate Library](https://github.com/btielen/covid-certificate)
 * [DCC-Utils Implementation of the Italien Health Ministry](https://github.com/ministero-salute/dcc-utils)
 * [COVID Tracker App of Ireland](https://github.com/HSEIreland/covid-tracker-app)
+
+## Build
+The build is done with the Typescript-Compiler. Run ``npm run build``.
+## Testing
+You can run the [Jasmine-Tests](https://jasmine.github.io/setup/browser.html) with ``npm run test:serve`` or ``npm run test``.
+## Further Readings
+* [Hert Spec](https://github.com/ehn-dcc-development/hcert-spec/blob/main/hcert_spec.md)
+* [Technical Specifications](https://ec.europa.eu/health/system/files/2021-04/digital-green-certificates_v3_en_0.pdf)
+## Contribute
+Please feel free to contribute or contact me if you have some Questions.
