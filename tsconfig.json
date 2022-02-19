@@ -10,7 +10,7 @@
     "importHelpers": true,
     "baseUrl": "./",
     "inlineSourceMap": true,
-    "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "strict": true,
