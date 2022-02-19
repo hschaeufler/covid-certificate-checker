@@ -1,6 +1,6 @@
 {
   "name": "covid-certificate-checker",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Web-Library for Reading and Verifying Covid Vaccination Certificates",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
