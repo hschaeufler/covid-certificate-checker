@@ -7,6 +7,7 @@ import {CertMapperUtil} from "./CertMapper.util";
 import {HealthCertificateClaim} from "./models/HealthCertificateClaim";
 import {TrustListModel} from "./models/TrustList.model";
 import {CertificateModel} from "./models/Certificate.model";
+import { CoseMessageModel } from "./models/CoseMessage.model";
 
 //See: https://github.com/ehn-dcc-development/ehn-sign-verify-javascript-trivial/blob/main/cose_verify.js
 export class ElectronicHealthCertificateChecker {
@@ -49,12 +50,12 @@ export class ElectronicHealthCertificateChecker {
         };
     }
 
-    static decodeCertificate(certificate: string): HealthCertificateClaim {
+    private static decodeCertificate(certificate: string): HealthCertificateClaim {
         const decodedCertificate = this.decodeCBOR(this.inflateZlib(this.decodeBase45(this.removeHC1Header(certificate))));
         return decodedCertificate.hcertCertClaim;
     }
 
-    static removeHC1Header(certificate: string): string {
+    private static removeHC1Header(certificate: string): string {
         if (certificate.startsWith("HC1:")) {
             return certificate.substring(4);
         }
@@ -62,15 +63,15 @@ export class ElectronicHealthCertificateChecker {
         return certificate;
     }
 
-    static decodeBase45(encodedMessage: string): Uint8Array {
+    private static decodeBase45(encodedMessage: string): Uint8Array {
         return b45.decode(encodedMessage);
     }
 
-    static inflateZlib(compressedString: Uint8Array): Uint8Array {
+    private static inflateZlib(compressedString: Uint8Array): Uint8Array {
         return pako.inflate(compressedString)
     }
 
-    static decodeCBOR(cborByteArray: Uint8Array): {
+    private static decodeCBOR(cborByteArray: Uint8Array): {
         coseMessage: CoseMessageModel,
         hcertCertClaim: HealthCertificateClaim,
         kid: string

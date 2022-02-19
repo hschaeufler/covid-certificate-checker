@@ -12,8 +12,9 @@ You can easily use the Library as ES6 Module.
 
 ### Read Certificate
 ```
-import ElectronicHealthCertificateChecker from "../dist";
+import ElectronicHealthCertificateChecker from "covid-certificate-checker";
 
+//Readout String form QR-Code
 const testCertificate = "HC1:....";
 const healthCertificateClaim = ElectronicHealthCertificateChecker.decodeCertificate(testCertificate);
 console.log(healthCertificateClaim);
@@ -63,15 +64,17 @@ const {
 ```
 
 ### Verify Signature
-There are two ways two verify the signature. You can use a rawData-Public-Key, like in the German TrustList:
-[Testumgebung Trustlist](https://de.test.dscg.ubirch.com/trustList/DSC/).
+There are two ways to verify the signature. You can use a Document Signing Certificate like published in the German DSCList (field rawData):
+* [Test Document Signing Certificate List](https://de.test.dscg.ubirch.com/trustList/DSC/)
+* [Production Document Signing Certificate List](https://de.dscg.ubirch.com/trustList/DSC/)
+* [Schema Definition](https://github.com/Digitaler-Impfnachweis/certification-apis/tree/master/dsc-update)
 ```
 const {
   healthCertificateClaim,
   isVerified
 } = await ElectronicHealthCertificateChecker.verifyCertificate(testCertificate, rawKey);
 ```
-Or you can verify the Signature by submitting a TrustList-Object in the format of https://de.test.dscg.ubirch.com/trustList/DSC/
+Or you can verify the Signature by submitting a TrustList-Object in the format of the German DSCList. The matching is done over the Key Identifier (kid).
 ```
 const {
   healthCertificateClaim,
@@ -79,3 +82,9 @@ const {
 } = await ElectronicHealthCertificateChecker.verifyCertificate(testCertificate, undefined, trustList);
 ```
 
+## Inspiration
+Other projects and libraries I used as inspiration:
+* [Simple Javascript Implementation of Sign and Verify](https://github.com/ehn-dcc-development/ehn-sign-verify-javascript-trivial)
+* [Digital Covid Certificate Library](https://github.com/btielen/covid-certificate)
+* [DCC-Utils Implementation of the Italien Health Ministry](https://github.com/ministero-salute/dcc-utils)
+* [COVID Tracker App of Ireland](https://github.com/HSEIreland/covid-tracker-app)

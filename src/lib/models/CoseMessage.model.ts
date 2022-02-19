@@ -1,4 +1,4 @@
-interface CoseMessageModel {
+export interface CoseMessageModel {
     protectHeader: Uint8Array,
     unprotectHeader: Object,
     payload: Uint8Array,

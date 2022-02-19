@@ -2,19 +2,19 @@
   "compileOnSave": true,
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
-    "module": "es2020",
+    "module": "ES6",
     "moduleResolution": "node",
-    "lib": [ "es2015", "dom" ],
-    "target": "es5",
+    "lib": [ "ES6", "DOM" ],
+    "target": "ES6",
     "outDir": "./dist",
-    "importHelpers": true,
     "baseUrl": "./",
     "inlineSourceMap": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "importHelpers": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]
