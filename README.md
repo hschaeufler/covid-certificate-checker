@@ -16,7 +16,7 @@ import ElectronicHealthCertificateChecker from "covid-certificate-checker";
 
 //Readout String form QR-Code
 const testCertificate = "HC1:....";
-const healthCertificateClaim = ElectronicHealthCertificateChecker.decodeCertificate(testCertificate);
+const healthCertificateClaim = ElectronicHealthCertificateChecker.decode(testCertificate);
 console.log(healthCertificateClaim);
 ```
 Example:
@@ -53,17 +53,6 @@ Example:
 ```
 
 ### Verify Signature
-
-You can verify the Signature by submitting a TrustList-Object in the format of https://de.test.dscg.ubirch.com/trustList/DSC/
-
-```
-const {
-  healthCertificateClaim,
-  isVerified
-} = await ElectronicHealthCertificateChecker.verifyCertificate(testCertificate, undefined, trustList);
-```
-
-### Verify Signature
 There are two ways to verify the signature. You can use a Document Signing Certificate like published in the German DSCList (field rawData):
 * [Test Document Signing Certificate List](https://de.test.dscg.ubirch.com/trustList/DSC/)
 * [Production Document Signing Certificate List](https://de.dscg.ubirch.com/trustList/DSC/)
@@ -72,14 +61,14 @@ There are two ways to verify the signature. You can use a Document Signing Certi
 const {
   healthCertificateClaim,
   isVerified
-} = await ElectronicHealthCertificateChecker.verifyCertificate(testCertificate, rawKey);
+} = await ElectronicHealthCertificateChecker.verify(testCertificate, rawKey);
 ```
 Or you can verify the Signature by submitting a TrustList-Object in the format of the German DSCList. The matching is done over the Key Identifier (kid).
 ```
 const {
   healthCertificateClaim,
   isVerified
-} = await ElectronicHealthCertificateChecker.verifyCertificate(testCertificate, undefined, trustList);
+} = await ElectronicHealthCertificateChecker.verifyWithTrustList(testCertificate, trustList);
 ```
 
 ## Inspiration

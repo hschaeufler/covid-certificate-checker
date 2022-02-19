@@ -7,52 +7,90 @@ import {CertMapperUtil} from "./CertMapper.util";
 import {HealthCertificateClaim} from "./models/HealthCertificateClaim";
 import {TrustListModel} from "./models/TrustList.model";
 import {CertificateModel} from "./models/Certificate.model";
-import { CoseMessageModel } from "./models/CoseMessage.model";
+import {CoseMessageModel} from "./models/CoseMessage.model";
 
 //See: https://github.com/ehn-dcc-development/ehn-sign-verify-javascript-trivial/blob/main/cose_verify.js
 export class ElectronicHealthCertificateChecker {
 
-    static async verifyCertificate(
+    static decode(certificate: string): HealthCertificateClaim {
+        try {
+            const decodedCertificate = this.decodeCBOR(this.inflateZlib(this.decodeBase45(this.removeHC1Header(certificate))));
+            return decodedCertificate.hcertCertClaim;
+        } catch (e) {
+            console.error("Error has happened at decoding Certificate", e);
+            throw e;
+        }
+    }
+
+    static async verify(
+        certificate: string,
+        dscKey: string,
+    ) : Promise <{
+        healthCertificateClaim: HealthCertificateClaim,
+        isVerified: boolean
+        }>
+    {
+        try {
+            return ElectronicHealthCertificateChecker.verifyCertificate(certificate, dscKey);
+        } catch (e) {
+            console.error(e);
+            throw e;
+        }
+
+    }
+
+    static async verifyWithTrustList(
+        certificate: string,
+        trustList: TrustListModel,
+    ) : Promise <{
+        healthCertificateClaim: HealthCertificateClaim,
+        isVerified: boolean
+    }>
+    {
+        try {
+            return ElectronicHealthCertificateChecker.verifyCertificate(certificate, undefined, trustList);
+        } catch (e) {
+            console.error(e);
+            throw e;
+        }
+
+    }
+
+    private static async verifyCertificate(
         certificate: string,
         publicKey?: string,
         trustList?: TrustListModel,
     ): Promise<{
         healthCertificateClaim: HealthCertificateClaim,
         isVerified: boolean,
-    }>
-    {
-        if(!trustList && !publicKey){
+    }> {
+        if (!trustList && !publicKey) {
             throw new DOMException("Please submit either a Public-Key or a Trust-List for verifying!");
         }
         const decodedCertificate = this.decodeCBOR(this.inflateZlib(this.decodeBase45(this.removeHC1Header(certificate))));
 
         let filteredCertificates: CertificateModel[] = [];
-        if(trustList && trustList.certificates) {
+        if (trustList && trustList.certificates) {
             filteredCertificates = trustList.certificates.filter(
                 certificate => certificate.kid == decodedCertificate.kid
             );
 
-            if(filteredCertificates.length < 1) {
-                throw new DOMException("No Certificate in Trust-List with specified kid: "+ decodedCertificate.kid);
+            if (filteredCertificates.length < 1) {
+                throw new DOMException("No Certificate in Trust-List with specified kid: " + decodedCertificate.kid);
             }
         }
 
         const key = filteredCertificates.length > 0 ? filteredCertificates[0].rawData : publicKey;
 
-        if(!key){
+        if (!key) {
             throw new DOMException("No Key was specified");
         }
 
-        const isVerified = await this.verifyCoseMessage(decodedCertificate.coseMessage,key);
+        const isVerified = await this.verifyCoseMessage(decodedCertificate.coseMessage, key);
         return {
             healthCertificateClaim: decodedCertificate.hcertCertClaim,
             isVerified
         };
-    }
-
-    private static decodeCertificate(certificate: string): HealthCertificateClaim {
-        const decodedCertificate = this.decodeCBOR(this.inflateZlib(this.decodeBase45(this.removeHC1Header(certificate))));
-        return decodedCertificate.hcertCertClaim;
     }
 
     private static removeHC1Header(certificate: string): string {
@@ -89,7 +127,7 @@ export class ElectronicHealthCertificateChecker {
         const decodedHeaders = cbor.decode(protectHeader);
 
         let kidUintArray;
-        if(decodedHeaders && decodedHeaders.has(4)) {
+        if (decodedHeaders && decodedHeaders.has(4)) {
             kidUintArray = decodedHeaders.get(4);
         } else if (unprotectHeader && unprotectHeader.has(4)) {
             kidUintArray = unprotectHeader.get(4);
@@ -105,7 +143,7 @@ export class ElectronicHealthCertificateChecker {
     }
 
 
-    static async verifyCoseMessage (
+    static async verifyCoseMessage(
         coseMessage: CoseMessageModel,
         publicKey: string
     ): Promise<boolean> {
@@ -117,13 +155,13 @@ export class ElectronicHealthCertificateChecker {
         const pk = await crypto.subtle.importKey(
             "spki",
             rawData,
-            { name: "ECDSA", namedCurve: "P-256" },
+            {name: "ECDSA", namedCurve: "P-256"},
             false,
             ["verify"]
         )
 
         const verified = await crypto.subtle.verify(
-            { name: "ECDSA", hash: "sha-256" },
+            {name: "ECDSA", hash: "sha-256"},
             pk,
             coseMessage.sig,
             cbor.encode(["Signature1", coseMessage.protectHeader, (new Uint8Array(0)).buffer, coseMessage.payload])

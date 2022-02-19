@@ -1,4 +1,5 @@
-import ElectronicHealthCertificateChecker from "dist";
+import {ElectronicHealthCertificateChecker} from "../dist";
+
 
 describe("A Covid-Certificate-Checker-Testsuite", function () {
 
@@ -7,7 +8,7 @@ describe("A Covid-Certificate-Checker-Testsuite", function () {
         const testCertificate = "HC1:6BF+70790T9WJWG.FKY*4GO0.O1CV2 O5 N2FBBRW1*70HS8WY04AC*WIFN0AHCD8KD97TK0F90KECTHGWJC0FDC:5AIA%G7X+AQB9746HS80:54IBQF60R6$A80X6S1BTYACG6M+9XG8KIAWNA91AY%67092L4WJCT3EHS8XJC +DXJCCWENF6OF63W5NW6WF6%JC QE/IAYJC5LEW34U3ET7DXC9 QE-ED8%E.JCBECB1A-:8$96646AL60A60S6Q$D.UDRYA 96NF6L/5QW6307KQEPD09WEQDD+Q6TW6FA7C466KCN9E%961A6DL6FA7D46JPCT3E5JDLA7$Q6E464W5TG6..DX%DZJC6/DTZ9 QE5$CB$DA/D JC1/D3Z8WED1ECW.CCWE.Y92OAGY8MY9L+9MPCG/D5 C5IA5N9$PC5$CUZCY$5Y$527BHB6*L8ARHDJL.Q7*2T7:SCNFZN70H6*AS6+T$D9UCAD97R8NIBO+/RJVE$9PAGPTBIZEP MO-Q0:R13IURRQ5MV93M9V3X2U:NDZSF";
         const jsonCertificateClaim = "{\"iss\":\"DE\",\"iat\":1643356073,\"exp\":1622316073,\"hcert\":{\"v\":[{\"ci\":\"URN:UVCI:01DE/IZ12345A/5CWLU12RNOB9RXSEOP6FG8#W\",\"co\":\"DE\",\"dn\":1,\"dt\":\"2021-05-29\",\"is\":\"Robert Koch-Institut\",\"ma\":\"ORG-100031184\",\"mp\":\"EU/1/20/1507\",\"sd\":2,\"tg\":\"840539006\",\"vp\":\"1119349007\"}],\"dob\":\"1964-08-12\",\"nam\":{\"fn\":\"Mustermann\",\"gn\":\"Erika\",\"fnt\":\"MUSTERMANN\",\"gnt\":\"ERIKA\"},\"ver\":\"1.0.0\"}}";
 
-        const healthCertificateClaim = ElectronicHealthCertificateChecker.decodeCertificate(testCertificate)
+        const healthCertificateClaim = ElectronicHealthCertificateChecker.decode(testCertificate)
         expect(JSON.stringify(healthCertificateClaim)).toEqual(jsonCertificateClaim);
     });
 
@@ -20,7 +21,7 @@ describe("A Covid-Certificate-Checker-Testsuite", function () {
         const {
             healthCertificateClaim,
             isVerified
-        } = await ElectronicHealthCertificateChecker.verifyCertificate(testCertificate, rawKey);
+        } = await ElectronicHealthCertificateChecker.verify(testCertificate, rawKey);
 
         expect(JSON.stringify(healthCertificateClaim)).toEqual(jsonCertificateClaim);
         expect(isVerified).toEqual(true);
@@ -54,7 +55,7 @@ describe("A Covid-Certificate-Checker-Testsuite", function () {
         const {
             healthCertificateClaim,
             isVerified
-        } = await ElectronicHealthCertificateChecker.verifyCertificate(testCertificate, undefined, trustList);
+        } = await ElectronicHealthCertificateChecker.verifyWithTrustList(testCertificate, trustList);
 
         expect(JSON.stringify(healthCertificateClaim)).toEqual(jsonCertificateClaim);
         expect(isVerified).toEqual(true);
