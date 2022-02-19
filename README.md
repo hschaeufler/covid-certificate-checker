@@ -10,6 +10,8 @@ There is a [overview](https://github.com/ehn-dcc-development/hcert-spec/blob/mai
 ## Usage
 You can easily use the Library as ES6 Module.
 
+### Install
+``npm i covid-certificate-checker``
 ### Read Certificate
 ```
 import ElectronicHealthCertificateChecker from "covid-certificate-checker";
