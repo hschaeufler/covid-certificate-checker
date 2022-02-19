@@ -1,12 +1,13 @@
 {
   "name": "covid-certificate-checker",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Web-Library for Reading and Verifying Covid Vaccination Certificates",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test:build" : "npm run build && npx webpack --config webpack-test.config.js --mode none",
     "test:serve": "npm run test:build && jasmine-browser-runner serve",
+    "publish": "npm run build && npm publish",
     "test": "npm run test:build && jasmine-browser-runner runSpecs",
     "build": "tsc"
   },

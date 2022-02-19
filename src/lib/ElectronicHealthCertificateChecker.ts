@@ -67,6 +67,9 @@ export default class ElectronicHealthCertificateChecker {
         if (!trustList && !publicKey) {
             throw new DOMException("Please submit either a Public-Key or a Trust-List for verifying!");
         }
+        if(!this.supportsWebCryptoApi()) {
+            throw new DOMException("Your Browser doesn't support WebCrypto-Api. Please provide a Polyfill!");
+        }
         const decodedCertificate = this.decodeCBOR(this.inflateZlib(this.decodeBase45(this.removeHC1Header(certificate))));
 
         let filteredCertificates: CertificateModel[] = [];
@@ -140,6 +143,13 @@ export default class ElectronicHealthCertificateChecker {
         const hcertCertClaim = CertMapperUtil.payloadToHCERTClaim(decodedPaylod);
 
         return {coseMessage, hcertCertClaim, kid};
+    }
+
+    static supportsWebCryptoApi(){
+        return !!crypto
+            && 'subtle' in crypto
+            && 'importKey' in crypto.subtle
+            && 'verify' in crypto.subtle;
     }
 
 
