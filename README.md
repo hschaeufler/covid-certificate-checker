@@ -57,6 +57,8 @@ There are two ways to verify the signature. You can use a Document Signing Certi
 * [Test Document Signing Certificate List](https://de.test.dscg.ubirch.com/trustList/DSC/)
 * [Production Document Signing Certificate List](https://de.dscg.ubirch.com/trustList/DSC/)
 * [Schema Definition](https://github.com/Digitaler-Impfnachweis/certification-apis/tree/master/dsc-update)
+
+For Verifying it's required that the Browser supports the Web Crypto Api
 ```
 const {
   healthCertificateClaim,

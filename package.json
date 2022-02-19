@@ -1,7 +1,7 @@
 {
   "name": "covid-certificate-checker",
-  "version": "0.2.0",
-  "description": "",
+  "version": "0.2.1",
+  "description": "Web-Library for Reading and Verifying Covid Vaccination Certificates",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -10,7 +10,7 @@
     "test": "npm run test:build && jasmine-browser-runner runSpecs",
     "build": "tsc"
   },
-  "keywords": [],
+  "keywords": ["DSC", "hcert", "DCC", "DGC", "Web","Base45", "CovPass", "electronic" ,"health", "certificate", "greenpass","cbor", "cose" ],
   "author": "Holger Schäufler",
   "license": "MIT",
   "dependencies": {
