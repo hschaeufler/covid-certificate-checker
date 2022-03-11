@@ -79,14 +79,17 @@ export default class ElectronicHealthCertificateChecker {
             );
 
             if (filteredCertificates.length < 1) {
-                throw new DOMException("No Certificate in Trust-List with specified kid: " + decodedCertificate.kid);
+               console.error("No Certificate in Trust-List with specified kid: " + decodedCertificate.kid);
             }
         }
 
         const key = filteredCertificates.length > 0 ? filteredCertificates[0].rawData : publicKey;
 
         if (!key) {
-            throw new DOMException("No Key was specified");
+            return {
+                healthCertificateClaim: decodedCertificate.hcertCertClaim,
+                isVerified: false,
+            };
         }
 
         const isVerified = await this.verifyCoseMessage(decodedCertificate.coseMessage, key);
